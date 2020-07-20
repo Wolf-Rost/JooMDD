@@ -15,7 +15,7 @@ context Entity
 
 -- Check if entity names are unique
 inv uniqueEntityIdentifier:
-Entity.allInstances()->isUnique(name)
+Entity.allInstances()->collect('^'.concat(name))->union(Entity.allInstances()->collect(name))->isUnique(i|i)
 -- Entity.allInstances()->forAll(e1, e2| e1 <> e2 implies e1.name <> e2.name and e1.name <> '^' + e2.name)
             
 -- Check if attribute identifiers are unique
