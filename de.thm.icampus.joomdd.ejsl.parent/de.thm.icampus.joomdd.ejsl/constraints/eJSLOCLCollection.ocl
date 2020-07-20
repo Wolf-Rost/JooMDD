@@ -194,7 +194,8 @@ self.extensions.languages->forAll(l | l.keyvaluepairs->forAll(kvn1, kvn2 | kvn1 
 
 -- Unique extension names for extensions of same type
 inv uniqueExtNames:
-self.extensions->forAll(e1, e2 | e1 <> e2 and e1.oclIsTypeOf(e2.oclType()) implies e1.name <> e2.name)
+self.extensions.oclTypes()->forAll(t | self.extensions->select(oclType() = t)->isUnique(name))
+-- self.extensions->forAll(e1, e2 | e1 <> e2 and e1.oclIsTypeOf(e2.oclType()) implies e1.name <> e2.name)
 
 -- Check for valid data mapping for modules and components (is component existing...)
 inv validCompModMapping:
